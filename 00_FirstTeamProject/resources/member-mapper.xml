@@ -1,1 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<properties>
+
+
+<comment> CUSTOMER SQL </comment>
+
+
+<entry key="signUp">
+INSERT
+  INTO
+       TB_CUSTOMER
+VALUES
+       (
+       ?
+     , ?
+     , ?
+     , ?
+     , ?
+       )
+</entry>
+
+
+</properties>
