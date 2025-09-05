@@ -32,6 +32,10 @@ public class OrderService {
 		return executeQuery(new OrderDao()::findAll);
 	}
 	
+	public Order findById(String orderId) {
+		return executeQuery(conn -> new OrderDao().findById(conn, order_Id));
+	}
+	
 	public int save(Order order) {
 		Connection conn = getConnection();
 		int result = new OrderDao().save(conn, order);

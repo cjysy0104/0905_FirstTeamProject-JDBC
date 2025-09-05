@@ -56,6 +56,36 @@ public class OrderDao {
 		return orders;
 	}
 	
+	public Order findById(Connection conn, String order_Id) {
+		
+		Order order = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findById");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, order_Id);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				order = new Order(rset.getString("Order_Id")
+								 ,rset.getString("USER_ID")
+								 ,rset.getString("PRODUCT_ID")
+								 ,rset.getInt("ORDER_NO")
+								 ,rset.getDate("ORDER_DATE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return order;
+	}
 	
 	
 	public int save(Connection conn, Order order) {
