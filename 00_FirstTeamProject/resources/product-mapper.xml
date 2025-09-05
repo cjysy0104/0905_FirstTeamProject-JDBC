@@ -1,1 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>PRODUCT SQL</comment>
+	
+	<entry key="findall">
+	SELECT 
+		   PRD_ID
+		 , PRD_NAME
+		 , CATEGORY
+		 , PRICE
+		 , STOCK
+	  FROM
+		   TB_PRODUCT
+	</entry>
+	
+	<entry key="findById">
+	SELECT 
+		   PRD_ID
+		 , PRD_NAME
+		 , CATEGORY
+		 , PRICE
+		 , STOCK
+	  FROM
+		   TB_PRODUCT
+	 WHERE 
+	 	   PRD_ID = ?
+	</entry>
+	
+	<entry key="save">
+	INSERT
+	  INTO 
+	  	   TB_PRODUCT
+	VALUES 
+		   (
+		   ?
+		 , ?
+		 , ?
+		 , ?
+		 , ?
+		   )
+	</entry>
+	
+	<entry key="delete">
+	DELETE
+	  FROM 
+	  	   TB_PRODUCT
+	 WHERE 
+	 	   PRD_ID = ?
+	</entry>
+	
+</properties>
