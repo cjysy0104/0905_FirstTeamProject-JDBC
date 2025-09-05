@@ -21,6 +21,22 @@
            BY 
               ORDER_DATE DESC
 	</entry>
+	
+	
+	
+	<entry key="save">
+      INSERT 
+        INTO 
+             TB_ORDER
+      VALUES 
+             (
+             ?
+           , ?
+           , ?
+           , ?
+           , SYSDATE
+             )
+	</entry>
 
 
 </properties>

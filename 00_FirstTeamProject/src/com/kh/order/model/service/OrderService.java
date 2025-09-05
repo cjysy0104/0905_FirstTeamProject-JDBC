@@ -1,6 +1,7 @@
 package com.kh.order.model.service;
 
 import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -29,6 +30,16 @@ public class OrderService {
 	
 	public List<Order> findAll(){
 		return executeQuery(new OrderDao()::findAll);
+	}
+	
+	public int save(Order order) {
+		Connection conn = getConnection();
+		int result = new OrderDao().save(conn, order);
+		if(result > 0) {
+			commit(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 }
