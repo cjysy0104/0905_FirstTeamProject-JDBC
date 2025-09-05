@@ -28,6 +28,19 @@
 	 	   PRD_ID = ?
 	</entry>
 	
+	<entry key="findByName">
+	SELECT 
+		   PRD_ID
+		 , PRD_NAME
+		 , CATEGORY
+		 , PRICE
+		 , STOCK
+	  FROM
+		   TB_PRODUCT
+	 WHERE 
+	 	   PRD_NAME LIKE ?
+	</entry>
+	
 	<entry key="save">
 	INSERT
 	  INTO 
@@ -42,12 +55,16 @@
 		   )
 	</entry>
 	
-	<entry key="delete">
-	DELETE
-	  FROM 
-	  	   TB_PRODUCT
+	<entry key="update">
+	UPDATE 
+		   TB_PRODUCT
+	   SET 
+	   	   PRD_NAME = ?
+	   	 , CATEGORY = ?
+	   	 , PRICE = ?
+	   	 , STOCK =?
 	 WHERE 
-	 	   PRD_ID = ?
+	 	   PRD_ID =?
 	</entry>
 	
 </properties>
