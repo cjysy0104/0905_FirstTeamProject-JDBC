@@ -1,5 +1,7 @@
 package com.kh.member.controller;
 
+import java.util.List;
+
 import com.kh.member.model.dto.MemberDto;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
@@ -34,5 +36,12 @@ public class MemberController {
 		
 		return result;
 		
+	}
+	
+	public List<Member> findAll(String adminId, String adminPwd) {
+		
+		List<Member> members = new MemberService().findAll(adminId, adminPwd);
+		
+		return members;
 	}
 }

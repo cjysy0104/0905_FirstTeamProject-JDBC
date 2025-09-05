@@ -41,6 +41,25 @@
 	       AND
 	           PHONE = ?          	       
 	</entry>
+	
+	<entry key="updatePwd">
+		UPDATE
+		       TB_CUSTOMER
+		   SET
+		       USER_PWD = ?
+		 WHERE
+		       USER_ID = ?
+		   AND
+		       USER_PWD = ?           
+	</entry>
 
-
+	<entry key="findAll">
+		SELECT
+		       USER_ID
+		     , USER_NAME
+		     , PHONE
+		     , ADDRESS
+	      FROM
+	           TB_CUSTOMER
+	</entry>
 </properties>

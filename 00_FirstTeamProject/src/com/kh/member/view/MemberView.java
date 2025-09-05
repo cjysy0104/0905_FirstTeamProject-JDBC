@@ -1,5 +1,6 @@
 package com.kh.member.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.kh.member.controller.MemberController;
@@ -15,6 +16,7 @@ public class MemberView {
 		System.out.println("2. 로그인");
 		System.out.println("3. 아이디 찾기");
 		System.out.println("4. 비밀번호 변경");
+		System.out.println("5. 전체회원 조회(관리자용)");
 		System.out.println("9. 프로그램 종료");
 		System.out.print("메뉴를 선택해주세요 > ");
 		int menuNo = sc.nextInt();
@@ -25,7 +27,8 @@ public class MemberView {
 		case 2 : login(); break;
 		case 3 : findId(); break;
 		case 4 : updatePwd(); break;
-		case 9 : break;
+		case 5 : findAll(); break;
+		case 9 : System.out.println("안녕히 가세요"); break;
 		}
 		
 	}
@@ -96,7 +99,33 @@ public class MemberView {
 		
 		int result = mc.updatePwd(userId, userPwd, userNewPwd);
 		
+		if(result > 0) {
+			System.out.println("비밀번호가 성공적으로 변경되었습니다.");
+		} else {
+			System.out.println("비밀번호 변경에 실패하였습니다.");
+		}
+		}
+	
+	public void findAll() {
+		System.out.println(" ---- 관리자용 조회 서비스 ---- ");
+		System.out.print("아이디 > ");
+		String adminId = sc.nextLine();
+		System.out.print("비밀번호 > ");
+		String adminPwd = sc.nextLine();
+		
+		List<Member> members = mc.findAll(adminId, adminPwd);
+		
+		if(!members.isEmpty()) {
+			System.out.println("전체 회원 수는 총 : " + members.size() + "명 입니다.");
+			for(Member member : members) {
+				System.out.println("아이디 : " + member.getUserId());
+				System.out.println("이름 : " + member.getUserName());
+				System.out.println("연락처 : " + member.getPhone());
+				System.out.println("주소 : " + member.getAddress());
+			}
+			
+		}
+		}
 	}
 	
-	
-}
+

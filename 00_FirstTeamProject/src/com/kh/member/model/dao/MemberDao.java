@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
+import com.kh.member.model.dto.MemberDto;
 import com.kh.member.model.vo.Member;
 
 public class MemberDao {
@@ -119,6 +120,57 @@ public class MemberDao {
 	 
 		
 	}
+	
+	public int updatePwd(Connection conn, MemberDto memberDto) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberDto.getUserNewPwd());
+			pstmt.setString(2, memberDto.getUserId());
+			pstmt.setString(3, memberDto.getUserPwd());
+			result = pstmt.executeUpdate();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		return result;
+	}
+	
+	public List<Member> findAll(Connection conn, String adminId, String adminPwd) {
+		List<Member> members = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setUserId(rset.getString("USER_ID"));
+				member.setUserName(rset.getString("USER_NAME"));
+				member.setPhone(rset.getString("PHONE"));
+				member.setAddress(rset.getString("ADDRESS"));
+				members.add(member);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return members;
+	} 
 	
 	
 }
