@@ -1,10 +1,14 @@
 package com.kh.product.run;
 
+import com.kh.product.view.ProductView;
+
 public class ProductRun {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		ProductView pv = new ProductView();
+		pv.prdMenu();
+		
 	}
 
 }

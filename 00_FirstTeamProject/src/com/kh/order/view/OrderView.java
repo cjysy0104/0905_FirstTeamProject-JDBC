@@ -15,10 +15,10 @@ public class OrderView {
 		
 		while(true) {
 			System.out.println(" ---- 주문 관리 프로그램 ---- ");
-			System.out.print(" 1. 주문 전체 조회");
-			System.out.print(" 2. 주문 번호로 조회");
-			System.out.print(" 3. 주문하기");
-			System.out.print(" 4. 주문 삭제");
+			System.out.println(" 1. 주문 전체 조회");
+			System.out.println(" 2. 주문 번호로 조회");
+			System.out.println(" 3. 주문하기");
+			System.out.println(" 4. 주문 삭제");
 			System.out.print(" 메뉴를 선택해주세요 > ");
 			int menuNo = sc.nextInt();
 			sc.nextLine();

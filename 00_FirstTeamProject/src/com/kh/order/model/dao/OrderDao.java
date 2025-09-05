@@ -19,7 +19,7 @@ public class OrderDao {
 	
 	public OrderDao() {
 		try {
-			prop.loadFromXML(new FileInputStream("resources/member.mapper.xml"));
+			prop.loadFromXML(new FileInputStream("resources/order-mapper.xml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

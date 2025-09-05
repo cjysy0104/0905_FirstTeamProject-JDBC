@@ -51,6 +51,11 @@ public class Product {
 		return Objects.equals(category, other.category) && Objects.equals(prdId, other.prdId)
 				&& Objects.equals(prdName, other.prdName) && price == other.price && stock == other.stock;
 	}
+	@Override
+	public String toString() {
+		return "[상품번호: " + prdId + ", 상품명: " + prdName + ", 카테고리: " + category + ", 가격: " + price
+				+ ", 재고수량: " + stock + "]";
+	}
 	
 	
 }
