@@ -23,6 +23,15 @@ public class Order {
 		this.order_No = order_No;
 		this.order_Date = order_Date;
 	}
+	
+	
+	public Order(String order_Id, String user_Id, String product_Id, int order_No) {
+		super();
+		this.order_Id = order_Id;
+		this.user_Id = user_Id;
+		this.product_Id = product_Id;
+		this.order_No = order_No;
+	}
 
 	public String getOrder_Id() {
 		return order_Id;

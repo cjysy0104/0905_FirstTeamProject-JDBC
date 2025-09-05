@@ -8,10 +8,18 @@ import com.kh.order.model.vo.Order;
 public class OrderController {
 	
 	public List<Order> findAll() {
-		
 		List<Order> orders = new OrderService().findAll();
-		
 		return orders;
 	}
+	
+
+	
+	public int save(String order_Id, String user_Id, String product_Id, int order_No) {
+		Order order = new Order(order_Id, user_Id, product_Id, order_No);
+		int result = new OrderService().save(order);
+		return result;
+	}
+	
+	
 
 }

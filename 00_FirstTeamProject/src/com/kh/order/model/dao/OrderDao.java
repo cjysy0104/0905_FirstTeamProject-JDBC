@@ -41,8 +41,8 @@ public class OrderDao {
 				Order order = new Order(rset.getString("ORDER_ID")
 									   ,rset.getString("USER_ID")
 									   ,rset.getString("PRODUCT_ID")
-									   ,rset.getInt("NUMBER")
-									   ,rset.getDate("OREDR_DATE"));
+									   ,rset.getInt("ORDER_NO")
+									   ,rset.getDate("ORDER_DATE"));
 				orders.add(order);
 			}
 				
@@ -55,5 +55,38 @@ public class OrderDao {
 		
 		return orders;
 	}
+	
+	
+	
+	public int save(Connection conn, Order order) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			prop.loadFromXML(new FileInputStream("resources/order-mapper.xml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String sql = prop.getProperty("save");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, order.getOrder_Id());
+			pstmt.setString(2, order.getUser_Id());
+			pstmt.setString(3, order.getProduct_Id());
+			pstmt.setInt(4, order.getOrder_No());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
 
 }
