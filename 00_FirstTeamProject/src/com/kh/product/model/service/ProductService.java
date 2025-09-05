@@ -5,6 +5,7 @@ import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.commit;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.kh.product.model.dao.ProductDao;
 import com.kh.product.model.vo.Product;
@@ -32,6 +33,14 @@ public class ProductService {
 		close(conn);
 		
 		return result;
+	}
+
+	public List<Product> findAll() {
+		List<Product> products = new ProductDao().findAll(conn);
+		
+		close(conn);
+		
+		return products;
 	}
 
 }

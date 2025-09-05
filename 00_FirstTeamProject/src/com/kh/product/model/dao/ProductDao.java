@@ -4,7 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.kh.product.model.vo.Product;
@@ -24,6 +27,7 @@ public class ProductDao {
 	public int save(Connection conn, Product product) {
 		PreparedStatement pstat = null;
 		int result = 0;
+		
 		String sql = prop.getProperty("save");
 
 		try {
@@ -38,6 +42,32 @@ public class ProductDao {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public List<Product> findAll(Connection conn) {
+		PreparedStatement pstat = null;
+		ResultSet rset = null;
+		List<Product> products = new ArrayList();
+		
+		String sql = prop.getProperty("findAll");
+		
+		try {
+			pstat = conn.prepareStatement(sql);
+			rset = pstat.executeQuery();
+			
+			while(rset.next()) {
+				Product product = new Product(rset.getString("PRD_ID")
+											, rset.getString("PRD_NAME")
+											, rset.getString("CATEGORY")
+											, rset.getInt("PRICE")
+											, rset.getInt("STOCK"));
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+				
+		return products;
 	}
 
 }

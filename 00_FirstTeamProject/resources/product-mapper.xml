@@ -4,7 +4,7 @@
 
 	<comment>PRODUCT SQL</comment>
 	
-	<entry key="findall">
+	<entry key="findAll">
 	SELECT 
 		   PRD_ID
 		 , PRD_NAME
