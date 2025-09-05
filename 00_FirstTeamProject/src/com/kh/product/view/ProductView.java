@@ -17,14 +17,13 @@ public class ProductView {
 
 			System.out.println("상품 목록 메뉴입니다.");
 			System.out.println("1. 전체 상품 목록 조회");
-			System.out.println("2. 특정 상품 목록 조회");
+			System.out.println("2. 상품 이름 검색");
 			System.out.println("3. 신규 상품 목록 기입");
-			System.out.println("4. 특정 상품 삭제");
+			System.out.println("4. 상품 정보 수정");
 			System.out.println("9. 프로그램 종료");
-			
+
 			int menuNo = 0;
-			
-			
+
 			try {
 				menuNo = sc.nextInt();
 				sc.nextLine();
@@ -32,22 +31,100 @@ public class ProductView {
 				e.printStackTrace();
 				sc.nextLine();
 			}
-			switch(menuNo) {
-			case 1: findAll(); break;
-			case 2: break;
-			case 3: save(); break;
-			case 4: break;
-			case 9: break;
-			default : System.out.println("잘못된 숫자 입력"); break;
+			switch (menuNo) {
+			case 1:
+				findAll();
+				break;
+			case 2:
+				findByName();
+				break;
+			case 3:
+				save();
+				break;
+			case 4: 
+				update();
+				break;
+			case 5: 
+				findById();
+				break;
+			case 9:
+				System.out.println("안녕히 가세요");
+				return;
+			default:
+				System.out.println("잘못된 숫자 입력");
 			}
 
 		}
 
 	}
 
+	private void update() {
+		System.out.println("바꿀 상품의 ID");
+		String prdId = sc.nextLine();
+		System.out.println("================================");
+		
+		String prdName, category;
+		int price, stock;
+		System.out.println("상품명?");
+		prdName = sc.nextLine();
+		System.out.println("카테고리?");
+		category = sc.nextLine();
+		System.out.println("가격?");
+		price = sc.nextInt();
+		sc.nextLine();
+		System.out.println("재고?");
+		stock = sc.nextInt();
+		sc.nextLine();
+		
+		int result = pc.update(prdId, prdName, category, price, stock);
+		
+		if(result > 0) {
+			System.out.println("성공");
+		} else {
+			System.out.println("실패");
+		}
+		
+		
+	}
+
+	private void findById() {
+		System.out.println("검색");
+		String prdId = sc.nextLine();
+		
+		Product product = pc.findById(prdId);
+		if(product != null) {
+			System.out.println(product.toString());
+		} else {
+			System.out.println("검색결과 없음");
+		}
+	}
+
 	/**
-	 * View클래스: 현재 DB에 존재하는 데이터(상품)를 조회하는 메서드를 호출하여 결과값을 출력하는 메서드입니다.
-	 * 값이 담긴 데이터를 List형태로 반환받아 데이터를 반복적으로 출력합니다.
+	 * View클래스: 사용자에게 입력받아서 이름검색메서드를 호출하고 결과를 출력하는 메서드입니다. 입력한 값이 포함되있는 데이터를 전부
+	 * 가져옵니다. 입력받는것: 상품명(String) List 형태로 반환받아 필드값을 toString()으로 전부 출력합니다.
+	 */
+	private void findByName() {
+		System.out.println("특정 상품 조회 시스템입니다.");
+		System.out.println("================================");
+		System.out.println("검색하실 상품 이름을 입력하세요");
+		String prdName = sc.nextLine();
+
+		List<Product> products = pc.findByName(prdName);
+		if (products.isEmpty()) {
+			System.out.println("검색 결과 존재하는 상품이 없습니다.");
+			return;
+		} else {
+			System.out.println("검색 결과입니다.");
+			for (Product product : products) {
+				System.out.println(product.toString());
+			}
+		}
+
+	}
+
+	/**
+	 * View클래스: 현재 DB에 존재하는 데이터(상품)를 조회하는 메서드를 호출하여 결과값을 출력하는 메서드입니다. 값이 담긴 데이터를
+	 * List형태로 반환받아 데이터를 반복적으로 출력합니다.
 	 * 
 	 */
 	private void findAll() {
@@ -67,9 +144,9 @@ public class ProductView {
 	}
 
 	/**
-	 * View클래스: 사용자에게 입력받아서 상품정보기입 메서드를 호출하고 결과를 출력하는 메서드입니다. 
-	 * 입력받는것: 상품번호(String), 상품명(String), 카테고리(String), 가격(int), 재고수량(int)
-	 * 메서드 호출을 통해 반환받은 result 값이 1 이상이면 성공, 0이 반환되면 실패입니다.
+	 * View클래스: 사용자에게 입력받아서 상품정보기입 메서드를 호출하고 결과를 출력하는 메서드입니다. 입력받는것: 상품번호(String),
+	 * 상품명(String), 카테고리(String), 가격(int), 재고수량(int) 메서드 호출을 통해 반환받은 result 값이 1
+	 * 이상이면 성공, 0이 반환되면 실패입니다.
 	 */
 	private void save() {
 		System.out.println("신규 상품 목록 기입 시스템입니다.");
