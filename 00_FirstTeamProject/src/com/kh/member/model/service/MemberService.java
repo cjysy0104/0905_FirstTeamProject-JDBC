@@ -21,5 +21,21 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public Member login(String userId, String userPwd) {
 
+		Member member = new MemberDao().login(conn, userId, userPwd);
+		
+		
+		return member;
+	}
+	
+	public Member findId(String userName, String phone) {
+		
+		Member member = new MemberDao().findId(conn, userName, phone);
+		
+		
+		return member;
+		
+	} 
 }
